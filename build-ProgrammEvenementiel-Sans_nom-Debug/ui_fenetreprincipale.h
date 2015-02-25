@@ -33,8 +33,8 @@ public:
     QWidget *centralWidget;
     QPushButton *pushButton;
     QCheckBox *pleinEcran;
-    QSlider *horizontalSlider;
-    QProgressBar *progressBar;
+    QSlider *Slider;
+    QProgressBar *Progress;
     QDial *dial;
     QLCDNumber *lcdNumber;
     QToolBar *mainToolBar;
@@ -55,23 +55,28 @@ public:
         pleinEcran->setObjectName(QStringLiteral("pleinEcran"));
         pleinEcran->setGeometry(QRect(40, 110, 101, 26));
         pleinEcran->setLayoutDirection(Qt::LeftToRight);
-        horizontalSlider = new QSlider(centralWidget);
-        horizontalSlider->setObjectName(QStringLiteral("horizontalSlider"));
-        horizontalSlider->setEnabled(true);
-        horizontalSlider->setGeometry(QRect(10, 90, 181, 20));
-        horizontalSlider->setLayoutDirection(Qt::RightToLeft);
-        horizontalSlider->setTracking(true);
-        horizontalSlider->setOrientation(Qt::Horizontal);
-        progressBar = new QProgressBar(centralWidget);
-        progressBar->setObjectName(QStringLiteral("progressBar"));
-        progressBar->setGeometry(QRect(210, 90, 181, 23));
-        progressBar->setValue(0);
+        Slider = new QSlider(centralWidget);
+        Slider->setObjectName(QStringLiteral("Slider"));
+        Slider->setEnabled(true);
+        Slider->setGeometry(QRect(10, 90, 181, 20));
+        Slider->setLayoutDirection(Qt::RightToLeft);
+        Slider->setTracking(true);
+        Slider->setOrientation(Qt::Horizontal);
+        Slider->setTickPosition(QSlider::NoTicks);
+        Progress = new QProgressBar(centralWidget);
+        Progress->setObjectName(QStringLiteral("Progress"));
+        Progress->setGeometry(QRect(210, 90, 181, 23));
+        Progress->setToolTipDuration(0);
+        Progress->setLayoutDirection(Qt::LeftToRight);
+        Progress->setMaximum(100);
+        Progress->setValue(0);
         dial = new QDial(centralWidget);
         dial->setObjectName(QStringLiteral("dial"));
         dial->setGeometry(QRect(40, 0, 101, 81));
         lcdNumber = new QLCDNumber(centralWidget);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
         lcdNumber->setGeometry(QRect(213, 2, 171, 81));
+        lcdNumber->setToolTipDuration(0);
         FenetrePrincipale->setCentralWidget(centralWidget);
         mainToolBar = new QToolBar(FenetrePrincipale);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -81,6 +86,9 @@ public:
         FenetrePrincipale->setStatusBar(statusBar);
 
         retranslateUi(FenetrePrincipale);
+        QObject::connect(dial, SIGNAL(sliderMoved(int)), Slider, SLOT(setValue(int)));
+        QObject::connect(dial, SIGNAL(sliderMoved(int)), Progress, SLOT(setValue(int)));
+        QObject::connect(dial, SIGNAL(sliderMoved(int)), lcdNumber, SLOT(display(int)));
 
         QMetaObject::connectSlotsByName(FenetrePrincipale);
     } // setupUi
@@ -90,7 +98,7 @@ public:
         FenetrePrincipale->setWindowTitle(QApplication::translate("FenetrePrincipale", "FenetrePrincipale", 0));
         pushButton->setText(QApplication::translate("FenetrePrincipale", "Quitter", 0));
         pleinEcran->setText(QApplication::translate("FenetrePrincipale", "Plein \303\251cran", 0));
-        progressBar->setFormat(QApplication::translate("FenetrePrincipale", "Valeur re\303\247ue : %p%", 0));
+        Progress->setFormat(QApplication::translate("FenetrePrincipale", "Valeur re\303\247ue : %p%", 0));
     } // retranslateUi
 
 };
