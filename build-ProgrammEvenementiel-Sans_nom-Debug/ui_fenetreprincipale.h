@@ -68,11 +68,11 @@ public:
         Progress->setGeometry(QRect(210, 90, 181, 23));
         Progress->setToolTipDuration(0);
         Progress->setLayoutDirection(Qt::LeftToRight);
-        Progress->setMaximum(100);
+        Progress->setMaximum(99);
         Progress->setValue(0);
         dial = new QDial(centralWidget);
         dial->setObjectName(QStringLiteral("dial"));
-        dial->setGeometry(QRect(40, 0, 101, 81));
+        dial->setGeometry(QRect(43, 0, 101, 81));
         lcdNumber = new QLCDNumber(centralWidget);
         lcdNumber->setObjectName(QStringLiteral("lcdNumber"));
         lcdNumber->setGeometry(QRect(213, 2, 171, 81));

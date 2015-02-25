@@ -19,6 +19,10 @@ private slots:
     void on_pushButton_clicked();
 
 
+
+
+    void on_pleinEcran_clicked(bool checked);
+
 private:
     Ui::FenetrePrincipale *ui;
 };

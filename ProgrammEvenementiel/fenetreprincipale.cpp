@@ -17,3 +17,17 @@ void FenetrePrincipale::on_pushButton_clicked()
 {
     qApp->quit();
 }
+
+
+
+void FenetrePrincipale::on_pleinEcran_clicked(bool checked)
+{
+    if (check == true)
+    {
+        this->showFullScreen();
+    }
+    else
+    {
+        showNormal();
+    }
+}
